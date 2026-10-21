@@ -59,7 +59,7 @@ export function OfferSection() {
             </ul>
 
             <a
-              href="#inscricao"
+              href="/validacao"
               className="mx-auto inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-4 font-bold text-primary-foreground transition hover:brightness-125 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30"
             >
               <BadgeCheck className="size-5 text-highlight" aria-hidden="true" />

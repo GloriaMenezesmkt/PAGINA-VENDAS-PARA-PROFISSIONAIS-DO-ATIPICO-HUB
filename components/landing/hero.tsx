@@ -22,7 +22,7 @@ export function Hero() {
           <ProjectSummaryDialog />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <a
-              href="#inscricao"
+              href="/validacao"
               className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-base font-bold text-accent-foreground shadow-lg shadow-accent/25 transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/40"
             >
               Quero ser um Profissional Pioneiro
