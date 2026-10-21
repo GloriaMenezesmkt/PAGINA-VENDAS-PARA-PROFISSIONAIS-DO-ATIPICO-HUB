@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { ArrowRight, CalendarCheck, MapPin } from 'lucide-react'
+import { ProjectSummaryDialog } from './project-summary-dialog'
 
 export function Hero() {
   return (
@@ -18,6 +19,7 @@ export function Hero() {
             Conecte sua agenda à demanda de milhares de famílias atípicas através da primeira
             infraestrutura inteligente de conveniência em neurodivergências.
           </p>
+          <ProjectSummaryDialog />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <a
               href="#inscricao"
@@ -43,10 +45,10 @@ export function Hero() {
           />
           <div className="relative overflow-hidden rounded-3xl border bg-muted shadow-2xl shadow-primary/10">
             <Image
-              src="/images/hero-therapy.png"
-              alt="Fonoaudióloga atendendo uma criança com blocos coloridos em uma clínica iluminada"
-              width={1024}
-              height={1024}
+              src="/images/hero-clinic.png"
+              alt="Médica especialista sorrindo enquanto utiliza um tablet em um consultório moderno de alto padrão"
+              width={1200}
+              height={896}
               priority
               className="aspect-[4/3] w-full object-cover"
             />

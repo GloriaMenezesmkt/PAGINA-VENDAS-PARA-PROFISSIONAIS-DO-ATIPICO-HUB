@@ -78,7 +78,7 @@ export function SignupForm() {
         <span className="flex size-16 items-center justify-center rounded-full bg-accent/10">
           <CheckCircle2 className="size-9 text-accent" aria-hidden="true" />
         </span>
-        <h3 className="text-2xl font-extrabold text-primary">Vaga de Pioneiro reservada!</h3>
+        <h3 className="text-2xl font-extrabold text-primary">{state.title}</h3>
         <p className="max-w-md text-pretty leading-relaxed text-muted-foreground">
           {state.message}
         </p>
@@ -186,24 +186,43 @@ export function SignupForm() {
         <FieldError id="vacancyManagement-error" message={errors.vacancyManagement} />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-dashed border-highlight bg-highlight/10 p-4">
+      <fieldset
+        className="flex flex-col gap-3"
+        aria-describedby={errors.pioneerInterest ? 'pioneerInterest-error' : undefined}
+        aria-invalid={errors.pioneerInterest ? true : undefined}
+      >
+        <legend className="mb-3 font-semibold text-primary">
+          Você tem interesse em participar como Profissional Pioneiro?
+        </legend>
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border-2 border-dashed border-highlight bg-highlight/10 p-4 transition has-[:checked]:border-solid has-[:checked]:border-accent has-[:checked]:bg-accent/5 has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-accent/15">
           <input
-            type="checkbox"
-            name="consent"
+            type="radio"
+            name="pioneerInterest"
+            value="sim"
             required
             className="mt-1 size-5 shrink-0 accent-[var(--accent)]"
-            aria-invalid={errors.consent ? true : undefined}
-            aria-describedby={errors.consent ? 'consent-error' : undefined}
           />
           <span className="text-sm leading-relaxed text-foreground">
-            <strong className="text-primary">SIM!</strong> Quero entrar na lista de Profissionais
-            Pioneiros e aceito o contato no WhatsApp para ativação do pacote trimestral por R$
-            119,70.
+            <strong className="text-primary">SIM!</strong> Tenho interesse em apoiar este projeto,
+            quero entrar na lista de Profissionais Pioneiros e aceito o contato no WhatsApp para
+            ativação da vaga por R$ 119,70.
           </span>
         </label>
-        <FieldError id="consent-error" message={errors.consent} />
-      </div>
+        <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-input bg-background p-4 transition hover:border-accent/60 has-[:checked]:border-accent has-[:checked]:bg-accent/5 has-[:focus-visible]:ring-4 has-[:focus-visible]:ring-accent/15">
+          <input
+            type="radio"
+            name="pioneerInterest"
+            value="nao"
+            required
+            className="mt-1 size-5 shrink-0 accent-[var(--accent)]"
+          />
+          <span className="text-sm leading-relaxed text-foreground">
+            <strong className="text-primary">NÃO.</strong> Quero apenas contribuir com as respostas
+            da pesquisa e prefiro aguardar o lançamento oficial de mercado posteriormente.
+          </span>
+        </label>
+        <FieldError id="pioneerInterest-error" message={errors.pioneerInterest} />
+      </fieldset>
 
       {state.status === 'error' && state.message ? (
         <p
@@ -226,7 +245,7 @@ export function SignupForm() {
               Enviando...
             </>
           ) : (
-            'Garantir Minha Vaga de Pioneiro por R$ 119,70'
+            'Enviar Minhas Respostas'
           )}
         </button>
         <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground">

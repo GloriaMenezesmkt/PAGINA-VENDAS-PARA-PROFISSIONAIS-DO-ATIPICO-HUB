@@ -23,6 +23,7 @@ export const CHALLENGES = [
 
 export type SignupState = {
   status: 'idle' | 'success' | 'error'
+  title?: string
   message?: string
   fieldErrors?: Record<string, string>
 }

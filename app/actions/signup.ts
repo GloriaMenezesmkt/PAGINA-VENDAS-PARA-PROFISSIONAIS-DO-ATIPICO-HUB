@@ -27,7 +27,7 @@ const signupSchema = z.object({
     .trim()
     .min(5, 'Conte um pouco sobre como você gerencia seus horários.')
     .max(2000),
-  consent: z.literal('on', { error: 'Confirme sua participação para continuar.' }),
+  pioneerInterest: z.enum(['sim', 'nao'], { error: 'Escolha SIM ou NÃO para continuar.' }),
 })
 
 export async function submitPioneerSignup(
@@ -41,7 +41,7 @@ export async function submitPioneerSignup(
     acquisitionChannel: formData.get('acquisitionChannel') ?? '',
     mainChallenge: formData.get('mainChallenge') ?? '',
     vacancyManagement: formData.get('vacancyManagement') ?? '',
-    consent: formData.get('consent') ?? '',
+    pioneerInterest: formData.get('pioneerInterest') ?? '',
   })
 
   if (!parsed.success) {
@@ -53,10 +53,11 @@ export async function submitPioneerSignup(
     return { status: 'error', message: 'Revise os campos destacados.', fieldErrors }
   }
 
-  const { consent: _consent, ...data } = parsed.data
+  const { pioneerInterest, ...data } = parsed.data
+  const wantsPioneerSpot = pioneerInterest === 'sim'
 
   try {
-    await db.insert(pioneerSignups).values({ ...data, consent: true })
+    await db.insert(pioneerSignups).values({ ...data, consent: wantsPioneerSpot })
   } catch (error) {
     console.error('Failed to save pioneer signup', error)
     return {
@@ -65,8 +66,19 @@ export async function submitPioneerSignup(
     }
   }
 
+  if (wantsPioneerSpot) {
+    return {
+      status: 'success',
+      title: 'Vaga de Pioneiro reservada!',
+      message:
+        'Inscrição recebida! Em breve entraremos em contato pelo WhatsApp para ativar sua vaga pioneira.',
+    }
+  }
+
   return {
     status: 'success',
-    message: 'Inscrição recebida! Em breve entraremos em contato pelo WhatsApp para ativar seu pacote pioneiro.',
+    title: 'Obrigado pela sua contribuição!',
+    message:
+      'Suas respostas foram registradas e vão nos ajudar a construir o Atípico Hub. Avisaremos você no lançamento oficial.',
   }
 }
