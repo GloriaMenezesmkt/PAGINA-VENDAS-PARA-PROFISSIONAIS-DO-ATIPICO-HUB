@@ -1,14 +1,9 @@
 import Image from 'next/image'
-import { ArrowRight, MapPin, MessageCircle, Music2 } from 'lucide-react'
+import { ArrowRight, MapPin, MessageCircle, Music } from 'lucide-react'
+import { pioneerWhatsAppUrl } from './pioneer-whatsapp'
 import { ProjectSummaryDialog } from './project-summary-dialog'
 
 export function Hero() {
-  const whatsappNumber = process.env.PIONEER_WHATSAPP_NUMBER
-  const whatsappMessage = 'Olá! Vim pela página do Atípico Hub e quero participar do Lote Pioneiro.'
-  const whatsappUrl = whatsappNumber && /^[1-9]\d{7,14}$/.test(whatsappNumber)
-    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
-    : undefined
-
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:px-6 md:py-24 lg:grid-cols-2">
@@ -27,15 +22,13 @@ export function Hero() {
           </p>
           <ProjectSummaryDialog />
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-            {whatsappUrl && (
-              <a
-                href={whatsappUrl}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-base font-bold text-accent-foreground shadow-lg shadow-accent/25 transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/40"
-              >
-                Quero participar do Lote Pioneiro
-                <ArrowRight className="size-5" aria-hidden="true" />
-              </a>
-            )}
+            <a
+              href={pioneerWhatsAppUrl}
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-4 text-base font-bold text-accent-foreground shadow-lg shadow-accent/25 transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent/40"
+            >
+              Quero participar do Lote Pioneiro
+              <ArrowRight className="size-5" aria-hidden="true" />
+            </a>
             <p className="text-sm text-muted-foreground">
               Apenas <strong className="text-primary">50 vagas</strong> no Lote Pioneiro
             </p>
@@ -67,7 +60,7 @@ export function Hero() {
             </p>
             <div className="mt-3 flex items-center gap-3">
               <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                <Music2 className="size-5" aria-hidden="true" />
+                <Music className="size-5" aria-hidden="true" />
               </span>
               <div>
                 <p className="font-bold text-primary">Musicoterapeuta</p>
